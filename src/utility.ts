@@ -71,3 +71,5 @@ export function getPostOrCommentById (thingId: string, context: TriggerContext):
         throw new Error(`Invalid thingId ${thingId}`);
     }
 }
+
+  

@@ -1,7 +1,10 @@
 import { Devvit, SettingScope } from '@devvit/public-api';
 import {settingsForBanEvasionHandling} from "./settings.js"; 
 import {handleCommentSubmitEvent} from "./modplus.js";
-Devvit.configure({ redditAPI: true });
+Devvit.configure({ 
+  redditAPI: true,
+ // redis: true,
+});
 
 Devvit.addSettings(settingsForBanEvasionHandling);
 
