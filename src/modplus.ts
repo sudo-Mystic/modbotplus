@@ -35,10 +35,9 @@ async function handlePostOrCommentSubmitEvent(targetId: string, subredditName: s
         return;
     }
     const bannedWords = await context.settings.get(Setting.BannedWords);
-    console.log(bannedWords);
     const target = await getPostOrCommentById(targetId, context);
-    console.log(target.body);
    
+    
 
 }
 
