@@ -37,19 +37,36 @@ async function handlePostOrCommentSubmitEvent(targetId: string, subredditName: s
     const bannedWords = await context.settings.get(Setting.BannedWords) as string ?? "";
     const target = await getPostOrCommentById(targetId, context);
     if (hasBannedWords(target.body ?? "null", bannedWords)) {
-        console.log(`${target.authorName} commented a banned word.`)
+        console.log(`${target.authorName} commented a banned word.`);
+        removeComment(targetId, context,"Removal Reason");
 
     }
     else {
-        console.log(`${target.authorName} did not commented a banned word.`)
+        console.log(`${target.authorName} did not commented a banned word.`);
 
     }
 
 
 }
-async function removeComment(){
-    //TODO
-}
+async function removeComment(targetID: string,context: TriggerContext, removalReason:string) {
+    try {
+      // Use the remove method from the RedditAPIClient class
+      // The second parameter isSpam is set to false, you can adjust this as needed
+      await context.reddit.remove(targetID, false);
+      const removalReason = await context.settings.get(Setting.BannedWordsRemovalReason) as string ?? "";
+      if (removalReason) {
+        await context.reddit.submitComment({
+            id: targetID,
+            text: removalReason,
+           // richtext: new RichTextBuilder().rawText(removalReason)
+          });
+      }
+  
+      console.log('Comment removed successfully');
+    } catch (error) {
+      console.error('Failed to remove comment:', error);
+    }
+  }
 
 function hasBannedWords(sentence: string, bannedWords: string): boolean {
     // Return false if bannedWords is an empty string or contains only whitespace
