@@ -1,0 +1,19 @@
+import { RedditClient } from './reddit-client';
+import { RulesEngine } from './rules-engine';
+
+const redditClient = new RedditClient();
+const rulesEngine = new RulesEngine(redditClient);
+
+async function startBot() {
+    try {
+        await redditClient.authenticate();
+        console.log('Reddit bot authenticated successfully.');
+
+        // Start the moderation process
+        rulesEngine.startProcessing();
+    } catch (error) {
+        console.error('Error starting the Reddit bot:', error);
+    }
+}
+
+startBot();

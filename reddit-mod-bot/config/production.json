@@ -1,0 +1,26 @@
+{
+  "redditApi": {
+    "clientId": "YOUR_CLIENT_ID",
+    "clientSecret": "YOUR_CLIENT_SECRET",
+    "userAgent": "YOUR_USER_AGENT",
+    "username": "YOUR_REDDIT_USERNAME",
+    "password": "YOUR_REDDIT_PASSWORD"
+  },
+  "database": {
+    "host": "localhost",
+    "port": 27017,
+    "name": "reddit_mod_bot"
+  },
+  "server": {
+    "port": 3000,
+    "sessionSecret": "YOUR_SESSION_SECRET"
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/app.log"
+  },
+  "rules": {
+    "defaultAction": "ignore",
+    "maxRules": 100
+  }
+}
